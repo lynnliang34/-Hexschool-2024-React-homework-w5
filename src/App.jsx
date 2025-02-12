@@ -365,12 +365,17 @@ function App() {
               收件人姓名
             </label>
             <input
+              {...register("name", {
+                required: "姓名必填",
+              })}
               id="name"
-              className="form-control"
+              className={`form-control ${errors.name && "is-invalid"}`}
               placeholder="請輸入姓名"
             />
 
-            <p className="text-danger my-2"></p>
+            {errors.name && (
+              <p className="text-danger my-2">{errors.name.message}</p>
+            )}
           </div>
 
           <div className="mb-3">
