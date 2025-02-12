@@ -75,3 +75,66 @@ Note：API 路徑要傳的是 cart id，帶的資料傳的是 product id
 為結帳按鈕加上 disabled 樣式
 
 <br>
+
+## 加入 Loading 狀態
+
+[react-loading 套件](https://www.npmjs.com/package/react-loading)
+
+```bash
+import ReactLoading from 'react-loading';
+```
+
+```bash
+<ReactLoading type={'spin'} color={'#000'} height={'1.5rem'} width={'1.5rem'} />
+```
+
+有哪些地方可以加上 loading 狀態
+
+全螢幕
+
+- 取得產品列表
+- 調整購物車品項，數量 / 刪除
+- 清空購物車
+- 結帳
+
+<br>
+
+Loading 模板
+
+```jsx
+<div
+  className="d-flex justify-content-center align-items-center"
+  style={{
+    position: "fixed",
+    inset: 0,
+    backgroundColor: "rgba(255,255,255,0.3)",
+    zIndex: 999,
+  }}
+>
+  <ReactLoading type="spin" color="black" width="4rem" height="4rem" />
+</div>
+```
+
+<br>
+
+部分 - 加入購物車
+
+- 單一產品頁 / 產品 Modal
+- 產品列表
+
+模板
+
+```jsx
+<button
+  type="button"
+  className="btn btn-primary d-flex align-items-center gap-2"
+>
+  加入購物車
+  <ReactLoading
+    type={"spin"}
+    color={"#000"}
+    height={"1.5rem"}
+    width={"1.5rem"}
+  />
+</button>
+```

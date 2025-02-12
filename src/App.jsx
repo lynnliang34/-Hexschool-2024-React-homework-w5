@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Modal } from "bootstrap";
 import { useForm } from "react-hook-form";
+import ReactLoading from "react-loading";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_PATH = import.meta.env.VITE_API_PATH;
@@ -463,6 +464,18 @@ function App() {
             </button>
           </div>
         </form>
+      </div>
+
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{
+          position: "fixed",
+          inset: 0,
+          backgroundColor: "rgba(255,255,255,0.3)",
+          zIndex: 999,
+        }}
+      >
+        <ReactLoading type="spin" color="black" width="4rem" height="4rem" />
       </div>
     </div>
   );
