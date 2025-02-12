@@ -40,3 +40,9 @@ res.data.data.carts
 Note：API 路徑要傳的是 cart id
 
 <br>
+
+## 調整購物車產品數量
+
+Note：API 路徑要傳的是 cart id，帶的資料傳的是 product id
+
+<br>

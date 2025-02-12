@@ -93,6 +93,21 @@ function App() {
     }
   };
 
+  // 調整購物車商品數量
+  const updateCartItem = async (cartItem_id, product_id, qty) => {
+    try {
+      await axios.put(`${BASE_URL}/api/${API_PATH}/cart/${cartItem_id}`, {
+        data: {
+          product_id,
+          qty: Number(qty),
+        },
+      });
+      getCart();
+    } catch (error) {
+      alert("調整購物車商品數量失敗");
+    }
+  };
+
   return (
     <div className="container">
       <div className="mt-4">
@@ -252,6 +267,14 @@ function App() {
                       <div className="d-flex align-items-center">
                         <div className="btn-group me-2" role="group">
                           <button
+                            onClick={() =>
+                              updateCartItem(
+                                cartItem.id,
+                                cartItem.product_id,
+                                cartItem.qty - 1
+                              )
+                            }
+                            disabled={cartItem.qty === 1}
                             type="button"
                             className="btn btn-outline-dark btn-sm"
                           >
@@ -264,6 +287,13 @@ function App() {
                             {cartItem.qty}
                           </span>
                           <button
+                            onClick={() =>
+                              updateCartItem(
+                                cartItem.id,
+                                cartItem.product_id,
+                                cartItem.qty + 1
+                              )
+                            }
                             type="button"
                             className="btn btn-outline-dark btn-sm"
                           >
