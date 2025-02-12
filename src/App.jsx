@@ -405,13 +405,17 @@ function App() {
               收件人地址
             </label>
             <input
+              {...register("address", {
+                required: "地址必填",
+              })}
               id="address"
               type="text"
-              className="form-control"
+              className={`form-control ${errors.address && "is-invalid"}`}
               placeholder="請輸入地址"
             />
-
-            <p className="text-danger my-2"></p>
+            {errors.address && (
+              <p className="text-danger my-2">{errors.address.message}</p>
+            )}
           </div>
 
           <div className="mb-3">
