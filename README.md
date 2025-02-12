@@ -34,3 +34,9 @@ res.data.data.carts
 2. 清空購物車按鈕要加上 disabled 樣式
 
 <br>
+
+## 刪除購物車項目（[單一](<https://hexschool.github.io/ec-courses-api-swaggerDoc/#/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9%20-%20%E8%B3%BC%E7%89%A9%E8%BB%8A%20(Cart)/delete_v2_api__api_path__cart__id_>)、[全部](<https://hexschool.github.io/ec-courses-api-swaggerDoc/#/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9%20-%20%E8%B3%BC%E7%89%A9%E8%BB%8A%20(Cart)/delete_v2_api__api_path__carts>)）
+
+Note：API 路徑要傳的是 cart id
+
+<br>

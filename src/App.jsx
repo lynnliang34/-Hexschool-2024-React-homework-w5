@@ -83,6 +83,16 @@ function App() {
     }
   };
 
+  // 刪除購物車商品
+  const removeCartItem = async (cartItem_id) => {
+    try {
+      await axios.delete(`${BASE_URL}/api/${API_PATH}/cart/${cartItem_id}`);
+      getCart();
+    } catch (error) {
+      alert("刪除購物車商品失敗");
+    }
+  };
+
   return (
     <div className="container">
       <div className="mt-4">
@@ -230,6 +240,7 @@ function App() {
                   <tr key={cartItem.id}>
                     <td>
                       <button
+                        onClick={() => removeCartItem(cartItem.id)}
                         type="button"
                         className="btn btn-outline-danger btn-sm"
                       >
