@@ -17,3 +17,13 @@ npm i axios bootstrap react-hook-form react-loading
 分成 Modal 以及列表的按鈕
 
 函式可以設計成傳入對應的數字作為新增項目的數量
+
+<br>
+
+## 取得購物車列表
+
+[購物車列表 API](<https://hexschool.github.io/ec-courses-api-swaggerDoc/#/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9%20-%20%E8%B3%BC%E7%89%A9%E8%BB%8A%20(Cart)/get_v2_api__api_path__cart>)
+
+要留意回傳的資料結構
+
+res.data.data.carts
