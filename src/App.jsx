@@ -18,7 +18,6 @@ function App() {
     try {
       const res = await axios.get(`${BASE_URL}/api/${API_PATH}/cart`);
       setCart(res.data.data);
-      console.log(res.data.data);
     } catch (error) {
       alert("取得購物車列表失敗");
     }
@@ -115,10 +114,33 @@ function App() {
     formState: { errors },
   } = useForm();
 
+  const formRef = useRef(null);
+
   // 送出表單
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    const { message, ...user } = data;
+
+    const userInfo = {
+      data: {
+        user,
+        message,
+      },
+    };
+    checkout(userInfo);
+
+    // 清空表單
+    formRef.current.reset();
   });
+
+  // 結帳
+  const checkout = async (data) => {
+    try {
+      await axios.post(`${BASE_URL}/api/${API_PATH}/order`, data);
+      getCart();
+    } catch (error) {
+      alert("結帳失敗");
+    }
+  };
 
   return (
     <div className="container">
@@ -337,7 +359,7 @@ function App() {
       </div>
 
       <div className="my-5 row justify-content-center">
-        <form onSubmit={onSubmit} className="col-md-6">
+        <form ref={formRef} onSubmit={onSubmit} className="col-md-6">
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
               Email
@@ -423,6 +445,7 @@ function App() {
               留言
             </label>
             <textarea
+              {...register("message")}
               id="message"
               className="form-control"
               cols="30"
@@ -430,7 +453,12 @@ function App() {
             ></textarea>
           </div>
           <div className="text-end">
-            <button type="submit" className="btn btn-danger">
+            <button
+              type="submit"
+              className={`btn btn-danger ${
+                cart.carts?.length > 0 || "disabled"
+              }`}
+            >
               送出訂單
             </button>
           </div>
