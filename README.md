@@ -27,3 +27,10 @@ npm i axios bootstrap react-hook-form react-loading
 要留意回傳的資料結構
 
 res.data.data.carts
+
+#### 當購物車沒有資料時
+
+1. 不顯示列表
+2. 清空購物車按鈕要加上 disabled 樣式
+
+<br>

@@ -192,75 +192,84 @@ function App() {
         </div>
 
         <div className="text-end py-3">
-          <button className="btn btn-outline-danger" type="button">
+          <button
+            className={`btn btn-outline-danger ${
+              cart.carts?.length > 0 || "disabled"
+            }`}
+            type="button"
+          >
             清空購物車
           </button>
         </div>
 
-        <table className="table align-middle">
-          <thead>
-            <tr>
-              <th></th>
-              <th>品名</th>
-              <th style={{ width: "150px" }}>數量/單位</th>
-              <th className="text-end">單價</th>
-            </tr>
-          </thead>
+        {cart.carts?.length > 0 && (
+          <div>
+            <table className="table align-middle">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>品名</th>
+                  <th style={{ width: "150px" }}>數量/單位</th>
+                  <th className="text-end">單價</th>
+                </tr>
+              </thead>
 
-          <tbody>
-            {cart.carts?.map((cartItem) => (
-              <tr key={cartItem.id}>
-                <td>
-                  <button
-                    type="button"
-                    className="btn btn-outline-danger btn-sm"
-                  >
-                    x
-                  </button>
-                </td>
-                <td>{cartItem.product.title}</td>
-                <td style={{ width: "150px" }}>
-                  <div className="d-flex align-items-center">
-                    <div className="btn-group me-2" role="group">
+              <tbody>
+                {cart.carts?.map((cartItem) => (
+                  <tr key={cartItem.id}>
+                    <td>
                       <button
                         type="button"
-                        className="btn btn-outline-dark btn-sm"
+                        className="btn btn-outline-danger btn-sm"
                       >
-                        -
+                        x
                       </button>
-                      <span
-                        className="btn border border-dark"
-                        style={{ width: "50px", cursor: "auto" }}
-                      >
-                        {cartItem.qty}
-                      </span>
-                      <button
-                        type="button"
-                        className="btn btn-outline-dark btn-sm"
-                      >
-                        +
-                      </button>
-                    </div>
-                    <span className="input-group-text bg-transparent border-0">
-                      {cartItem.product.unit}
-                    </span>
-                  </div>
-                </td>
-                <td className="text-end">{cartItem.total}</td>
-              </tr>
-            ))}
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colSpan="3" className="text-end">
-                總計：
-              </td>
-              <td className="text-end" style={{ width: "130px" }}>
-                {cart.total}
-              </td>
-            </tr>
-          </tfoot>
-        </table>
+                    </td>
+                    <td>{cartItem.product.title}</td>
+                    <td style={{ width: "150px" }}>
+                      <div className="d-flex align-items-center">
+                        <div className="btn-group me-2" role="group">
+                          <button
+                            type="button"
+                            className="btn btn-outline-dark btn-sm"
+                          >
+                            -
+                          </button>
+                          <span
+                            className="btn border border-dark"
+                            style={{ width: "50px", cursor: "auto" }}
+                          >
+                            {cartItem.qty}
+                          </span>
+                          <button
+                            type="button"
+                            className="btn btn-outline-dark btn-sm"
+                          >
+                            +
+                          </button>
+                        </div>
+                        <span className="input-group-text bg-transparent border-0">
+                          {cartItem.product.unit}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="text-end">{cartItem.total}</td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colSpan="3" className="text-end">
+                    總計：
+                  </td>
+                  <td className="text-end" style={{ width: "130px" }}>
+                    {cart.total}
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        )}
       </div>
 
       <div className="my-5 row justify-content-center">
