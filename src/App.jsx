@@ -14,6 +14,9 @@ function App() {
   // 購物車列表狀態
   const [cart, setCart] = useState({});
 
+  // 螢幕 loading
+  const [isScreenLoading, setIsScreenLoading] = useState(false);
+
   // 取得購物車列表
   const getCart = async () => {
     try {
@@ -26,11 +29,14 @@ function App() {
 
   useEffect(() => {
     const getProducts = async () => {
+      setIsScreenLoading(true);
       try {
         const res = await axios.get(`${BASE_URL}/api/${API_PATH}/products`);
         setProducts(res.data.products);
       } catch (error) {
         alert("取得產品失敗");
+      } finally {
+        setIsScreenLoading(false);
       }
     };
     getProducts();
@@ -466,17 +472,19 @@ function App() {
         </form>
       </div>
 
-      <div
-        className="d-flex justify-content-center align-items-center"
-        style={{
-          position: "fixed",
-          inset: 0,
-          backgroundColor: "rgba(255,255,255,0.3)",
-          zIndex: 999,
-        }}
-      >
-        <ReactLoading type="spin" color="black" width="4rem" height="4rem" />
-      </div>
+      {isScreenLoading && (
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{
+            position: "fixed",
+            inset: 0,
+            backgroundColor: "rgba(255,255,255,0.3)",
+            zIndex: 999,
+          }}
+        >
+          <ReactLoading type="spin" color="black" width="4rem" height="4rem" />
+        </div>
+      )}
     </div>
   );
 }
