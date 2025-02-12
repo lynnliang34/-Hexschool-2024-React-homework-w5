@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Modal } from "bootstrap";
+import { useForm } from "react-hook-form";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_PATH = import.meta.env.VITE_API_PATH;
@@ -107,6 +108,17 @@ function App() {
       alert("調整購物車商品數量失敗");
     }
   };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  // 送出表單
+  const onSubmit = handleSubmit((data) => {
+    console.log(data);
+  });
 
   return (
     <div className="container">
@@ -325,19 +337,27 @@ function App() {
       </div>
 
       <div className="my-5 row justify-content-center">
-        <form className="col-md-6">
+        <form onSubmit={onSubmit} className="col-md-6">
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
               Email
             </label>
             <input
+              {...register("email", {
+                required: "Email 必填",
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: "Email 格式錯誤",
+                },
+              })}
               id="email"
               type="email"
-              className="form-control"
+              className={`form-control ${errors.email && "is-invalid"}`}
               placeholder="請輸入 Email"
             />
-
-            <p className="text-danger my-2"></p>
+            {errors.email && (
+              <p className="text-danger my-2">{errors.email.message}</p>
+            )}
           </div>
 
           <div className="mb-3">

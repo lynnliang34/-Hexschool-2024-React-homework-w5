@@ -46,3 +46,16 @@ Note：API 路徑要傳的是 cart id
 Note：API 路徑要傳的是 cart id，帶的資料傳的是 product id
 
 <br>
+
+## [結帳付款](<https://hexschool.github.io/ec-courses-api-swaggerDoc/#/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9%20-%20%E7%B5%90%E5%B8%B3%20(Order)/post_v2_api__api_path__order>)
+
+1. 從 useForm 取出需要的函式、狀態（register、handleSubmit、errors）
+2. 透過 register 註冊要綁定的狀態
+3. 撰寫錯誤提示、樣式
+4. 撰寫表單提交的函式
+
+#### Email 驗證
+
+```jsx
+/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+```
