@@ -43,6 +43,21 @@ function App() {
 
   const [qtySelect, setQtySelect] = useState(1);
 
+  // 加入購物車
+  const addCartItem = async (product_id, qty) => {
+    try {
+      const res = await axios.post(`${BASE_URL}/api/${API_PATH}/cart`, {
+        data: {
+          product_id,
+          qty: Number(qty),
+        },
+      });
+      console.log(res.data);
+    } catch (error) {
+      alert("加入購物車失敗");
+    }
+  };
+
   return (
     <div className="container">
       <div className="mt-4">
@@ -74,7 +89,7 @@ function App() {
                 <td>{product.title}</td>
                 <td>
                   <del className="h6">原價 {product.origin_price} 元</del>
-                  <div className="h5">特價 {product.origin_price}元</div>
+                  <div className="h5">特價 {product.price}元</div>
                 </td>
                 <td>
                   <div className="btn-group btn-group-sm">
@@ -85,7 +100,11 @@ function App() {
                     >
                       查看更多
                     </button>
-                    <button type="button" className="btn btn-outline-danger">
+                    <button
+                      onClick={() => addCartItem(product.id, 1)}
+                      type="button"
+                      className="btn btn-outline-danger"
+                    >
                       加到購物車
                     </button>
                   </div>
@@ -145,7 +164,11 @@ function App() {
                 </div>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-primary">
+                <button
+                  onClick={() => addCartItem(tempProduct.id, qtySelect)}
+                  type="button"
+                  className="btn btn-primary"
+                >
                   加入購物車
                 </button>
               </div>
