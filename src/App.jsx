@@ -128,9 +128,8 @@ function App() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
-
-  const formRef = useRef(null);
 
   // 送出表單
   const onSubmit = handleSubmit((data) => {
@@ -143,9 +142,6 @@ function App() {
       },
     };
     checkout(userInfo);
-
-    // 清空表單
-    formRef.current.reset();
   });
 
   // 結帳
@@ -154,6 +150,7 @@ function App() {
     try {
       await axios.post(`${BASE_URL}/api/${API_PATH}/order`, data);
       getCart();
+      reset();
     } catch (error) {
       alert("結帳失敗");
     } finally {
@@ -378,7 +375,7 @@ function App() {
       </div>
 
       <div className="my-5 row justify-content-center">
-        <form ref={formRef} onSubmit={onSubmit} className="col-md-6">
+        <form onSubmit={onSubmit} className="col-md-6">
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
               Email
