@@ -82,26 +82,33 @@ function App() {
 
   // 清空購物車
   const removeCart = async () => {
+    setIsScreenLoading(true);
     try {
       await axios.delete(`${BASE_URL}/api/${API_PATH}/carts`);
       getCart();
     } catch (error) {
       alert("清空購物車失敗");
+    } finally {
+      setIsScreenLoading(false);
     }
   };
 
   // 刪除購物車商品
   const removeCartItem = async (cartItem_id) => {
+    setIsScreenLoading(true);
     try {
       await axios.delete(`${BASE_URL}/api/${API_PATH}/cart/${cartItem_id}`);
       getCart();
     } catch (error) {
       alert("刪除購物車商品失敗");
+    } finally {
+      setIsScreenLoading(false);
     }
   };
 
   // 調整購物車商品數量
   const updateCartItem = async (cartItem_id, product_id, qty) => {
+    setIsScreenLoading(true);
     try {
       await axios.put(`${BASE_URL}/api/${API_PATH}/cart/${cartItem_id}`, {
         data: {
@@ -112,6 +119,8 @@ function App() {
       getCart();
     } catch (error) {
       alert("調整購物車商品數量失敗");
+    } finally {
+      setIsScreenLoading(false);
     }
   };
 
@@ -141,11 +150,14 @@ function App() {
 
   // 結帳
   const checkout = async (data) => {
+    setIsScreenLoading(true);
     try {
       await axios.post(`${BASE_URL}/api/${API_PATH}/order`, data);
       getCart();
     } catch (error) {
       alert("結帳失敗");
+    } finally {
+      setIsScreenLoading(false);
     }
   };
 
