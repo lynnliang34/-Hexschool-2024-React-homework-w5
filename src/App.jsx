@@ -17,6 +17,9 @@ function App() {
   // 螢幕 loading
   const [isScreenLoading, setIsScreenLoading] = useState(false);
 
+  // 部分 loading
+  const [isLoading, setIsLoading] = useState(false);
+
   // 取得購物車列表
   const getCart = async () => {
     try {
@@ -67,6 +70,7 @@ function App() {
 
   // 加入購物車
   const addCartItem = async (product_id, qty) => {
+    setIsLoading(true);
     try {
       await axios.post(`${BASE_URL}/api/${API_PATH}/cart`, {
         data: {
@@ -77,6 +81,8 @@ function App() {
       getCart();
     } catch (error) {
       alert("加入購物車失敗");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -200,12 +206,22 @@ function App() {
                     >
                       查看更多
                     </button>
+
                     <button
+                      disabled={isLoading}
                       onClick={() => addCartItem(product.id, 1)}
                       type="button"
-                      className="btn btn-outline-danger"
+                      className="btn btn-outline-danger d-flex align-items-center gap-2"
                     >
                       加到購物車
+                      {isLoading && (
+                        <ReactLoading
+                          type={"spin"}
+                          color={"#000"}
+                          height={"1.5rem"}
+                          width={"1.5rem"}
+                        />
+                      )}
                     </button>
                   </div>
                 </td>
@@ -265,11 +281,20 @@ function App() {
               </div>
               <div className="modal-footer">
                 <button
+                  disabled={isLoading}
                   onClick={() => addCartItem(tempProduct.id, qtySelect)}
                   type="button"
-                  className="btn btn-primary"
+                  className="btn btn-primary d-flex align-items-center gap-2"
                 >
                   加入購物車
+                  {isLoading && (
+                    <ReactLoading
+                      type={"spin"}
+                      color={"#000"}
+                      height={"1.5rem"}
+                      width={"1.5rem"}
+                    />
+                  )}
                 </button>
               </div>
             </div>
