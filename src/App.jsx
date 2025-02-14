@@ -3,7 +3,7 @@ import axios from "axios";
 import { Modal } from "bootstrap";
 import { useForm } from "react-hook-form";
 import ReactLoading from "react-loading";
-import AddToCartBtn from "./components/addToCartBtn";
+import AddToCartBtn from "./components/AddToCartBtn";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_PATH = import.meta.env.VITE_API_PATH;
